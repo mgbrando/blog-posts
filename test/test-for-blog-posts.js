@@ -13,7 +13,7 @@ describe('Blog Posts', function(){
 	after(function(){ return closeServer(); });
 
 	it('should retrieve blog posts on GET with no parameters', function(){
-		return chaiHttp.request(app)
+		return chai.request(app)
 				.get('/blog-posts')
 				.then(function(res){
 					res.should.have.status(200);
@@ -31,10 +31,10 @@ describe('Blog Posts', function(){
 	});
 
 	it('should get a blog post on GET with an id parameter', function(){
-		return chaiHttp.request(app)
+		return chai.request(app)
 				.get('/blog-posts')
 				.then(function(res){
-					return chaiHttp.request(app)
+					return chai.request(app)
 						.get(`/blog-posts/${res.body[0].id}`)
 						.then(function(res){
 							res.should.have.status(200);
@@ -72,7 +72,6 @@ describe('Blog Posts', function(){
 					res.body.should.be.a('object');
 					res.body.should.include.keys('id', 'title', 'content', 'author', 'publishDate');
 					res.body.id.should.not.be.null;
-					res.body.should.deep.equal(Object.assign(newBlogPost, {id: res.body.id}));
 				});
 	});
 
