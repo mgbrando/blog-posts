@@ -51,7 +51,7 @@ router.put('/:id', jsonParser, (req, res) => {
 		console.error(message);
 		res.status(400).send(message);
 	}
-	res.status(204).json(BlogPosts.update({
+	res.status(200).json(BlogPosts.update({
 		id: req.body.id,
 		title: req.body.title,
 		content: req.body.content,
